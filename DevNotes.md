@@ -1,0 +1,1 @@
+To connect tp mongodb, the mongodb Uri should have no quotes, and also no semi colons.

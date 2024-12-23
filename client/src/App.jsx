@@ -7,7 +7,7 @@ export default function App() {
       <nav>
         <ol>
           <li>
-            
+            home
           </li>
         </ol>
       </nav>  
