@@ -12,6 +12,8 @@ const app = express();
 // Middleware to parse incoming JSON
 app.use(express.json());
 
+app.use(cors());
+
 // Use post routes
 app.use('/api/posts', postRoutes);
 
