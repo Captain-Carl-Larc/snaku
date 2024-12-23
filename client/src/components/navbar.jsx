@@ -34,6 +34,9 @@ export default function Navbar() {
                     <li>
                         <Link to="/events">Events</Link>
                     </li>
+                    <li>
+                        <Link to="/executive">Executive</Link>
+                    </li>
                 </ul>
             </div>
         </header>

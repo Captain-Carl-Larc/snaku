@@ -6,7 +6,8 @@ import Home from './pages/home'; // Import the Home page
 import About from './pages/about'; // Import the About page
 import Events from './pages/events'; // Import the Events page
 import Contact from './pages/contact'; // Import the Contact page
-import Posts from './pages/posts';
+import Posts from './pages/posts';// Import the Posts page
+import Executive from './pages/executive'; // Import the Executive page
 import Admin from './pages/admin'; // Import the Admin page
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/events" element={<Events />} />
           <Route path="/posts" element={<Posts />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/Executive" element={<Executive />} />
           <Route path="/contact" element={<Contact />} />
         </Route>
       </Routes>
