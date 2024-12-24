@@ -15,5 +15,6 @@ router.get('/', getAllPosts);
 router.get('/:id', getPostById);
 
 
+  
 // Export the router
 export default router;

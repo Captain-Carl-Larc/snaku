@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { createPost } from '../services/postservices.js'; // Service for making the POST request
 
+
+
 const Admin = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -42,6 +44,8 @@ const Admin = () => {
     }
   };
 
+
+  
   return (
     <div>
       <h1>Admin Panel - Create a Post</h1>
@@ -141,9 +145,14 @@ const Admin = () => {
         </button>
       </form>
 
+
       {message && <p className="mt-4 text-center">{message}</p>}
     </div>
   );
 };
+
+//Delete all posts
+
+//export { Admin, DeleteAllButton };
 
 export default Admin;
