@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import Post from '../models/Post.js'; // Import the Post model
 
 // Controller function to create a new post
@@ -31,7 +32,12 @@ export const getAllPosts = async (req, res) => {
 // Controller function to get a specific post by ID
 export const getPostById = async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id); // Find post by ID
+    //Validate the id
+    const postID= req.params.id;
+    if(!mongoose.Types.ObjectId.isValid(postID)) return res.status(404).send('No post with that id');
+
+    //See if the post exists
+    const post = await Post.findById(postID); // Find post by ID
     if (!post) {
       return res.status(404).json({ message: 'Post not found' }); // If not found, send 404 error
     }
@@ -40,3 +46,69 @@ export const getPostById = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// Controller function to update a post by ID
+export const updatePost = async (req, res) => {
+  try {
+    //Validate the id
+    const postID= req.params.id;
+    if(!mongoose.Types.ObjectId.isValid(postID)){
+      return res.status(404).json({message:`Invalid string id ${postID}`});
+    } 
+
+    //See if the post exists
+    const post = await Post.findById(postID); // Find post by ID
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' }); // If not found, send 404 error
+    }
+
+    //Update the post if it exists
+    const updatedPost = await Post.findByIdAndUpdate (postID, req.body, {new: true});
+    res.status(200).json(updatedPost); // Send the updated post back as the response
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+// Controller function to delete a post by ID
+
+export const deletePost = async (req, res) => {
+  try {
+    //Validate the id
+      const id  = req.params.id;
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+          return res.status(404).json({ message: `Invalid string id ${id}` });//if the id is not valid return 404
+      }
+      //validate existence of the post
+      const post = await Post.findById(id);
+      if (!post) {
+          return res.status(404).json({ message: 'Post not found' });
+      }
+      //delete the post if it exists
+      await Post.findByIdAndDelete({_id: id});
+      res.status(200).json({ message: 'Post deleted successfully' });
+  } catch (error) {
+      res.status(500).json({ error: error.message });
+  }
+};
+      
+
+// Controller function to delete all posts
+export const deleteAllPosts = async (req, res) => {
+  try {
+    //Check if there are any posts
+    const posts = await Post.find();
+    if (posts.length === 0) {
+      return res.status(404).json({ message: 'No posts to delete' });
+    }
+
+    //Delete all posts if they exist
+    await Post.deleteMany({});
+    res.status(200).json({ message: 'All posts deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+

@@ -25,7 +25,16 @@ const createPost = async (postData) => {
   }
 };
 
+//Function to delete all posts
+const deleteAllPosts = async () => {
+  try {
+    const response = await axios.delete(BASE_URL);
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting posts:', error.message);
+    throw error;
+  }
+};
 
-
-export { createPost,getPosts };
+export { createPost,getPosts ,deleteAllPosts};
 

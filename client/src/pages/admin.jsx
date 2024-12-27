@@ -1,6 +1,6 @@
 // /client/src/pages/Admin.jsx
 import React, { useState } from 'react';
-import { createPost } from '../services/postservices.js'; // Service for making the POST request
+import { createPost,deleteAllPosts } from '../services/postservices.js'; // Service for making the POST request
 
 
 
@@ -15,6 +15,24 @@ const Admin = () => {
   const [reviewerIcon, setReviewerIcon] = useState('');
   const [message, setMessage] = useState('');
 
+//Delete all posts
+const handleDeleteAll = async () => {
+  try { 
+    //validate existance of posts
+    const posts = await getPosts();
+    if(posts.length===0){
+      setMessage('No posts to delete');
+      return;
+    }
+    
+    //delete all posts if they exist
+   const res= await deleteAllPosts();
+    setMessage('All posts deleted successfully');
+  } catch (error) {
+    setMessage('Error deleting posts');
+  }
+};
+  
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,6 +50,7 @@ const Admin = () => {
     try {
       const newPost = await createPost(postData); // Call the service to create the post
       setMessage(`Post created successfully: ${newPost.title}`);
+      // Clear the form
       setTitle('');
       setContent('');
       setAuthor('');
@@ -143,7 +162,11 @@ const Admin = () => {
         <button type="submit" className="w-full py-2 text-white bg-blue-500 rounded-md">
           Create Post
         </button>
+
       </form>
+      <button className="w-full py-2 my-6 text-white bg-red-500 rounded-md" onClick={handleDeleteAll}>
+          delete all posts
+        </button>
 
 
       {message && <p className="mt-4 text-center">{message}</p>}
