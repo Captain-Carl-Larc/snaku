@@ -5,6 +5,7 @@ const postSchema = new mongoose.Schema({
   title: { type: String, required: true },
   content: { type: String, required: true },
   // Category of the post
+  category: { type: String, required: true },
   author: { type: String, required: true }, // Author of the post
   reviewer: { type: String, required: true }, // Reviewer of the post
   published: { type: Boolean, default: false }, // Is the post published?

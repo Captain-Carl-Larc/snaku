@@ -7,6 +7,7 @@ import { createPost,deleteAllPosts } from '../services/postservices.js'; // Serv
 const Admin = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [category, setCategory] = useState('random');
   const [author, setAuthor] = useState('');
   const [reviewer, setReviewer] = useState('');
   const [published, setPublished] = useState(false);
@@ -40,6 +41,7 @@ const handleDeleteAll = async () => {
       title,
       content,
       author,
+      category,
       reviewer,
       published,
       coverImage,
@@ -99,6 +101,17 @@ const handleDeleteAll = async () => {
             id="author"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
+            className="w-full px-3 py-2 border rounded-md"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="category" className="block text-sm font-semibold">Category</label>
+          <input
+            type="text"
+            id="category"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
             className="w-full px-3 py-2 border rounded-md"
             required
           />
