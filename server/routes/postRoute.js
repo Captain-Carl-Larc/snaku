@@ -6,22 +6,22 @@ const router = express.Router();
 
 
 // POST request to create a new post
-router.post('/', createPost);
+router.post('/create/post', createPost);
 
 // GET request to get all posts
-router.get('/', getAllPosts);
+router.get('/get', getAllPosts);
 
 // GET request to get a specific post by ID
-router.get('/:id', getPostById);
+router.get('/get/:id', getPostById);
 
 // DELETE request to delete a specific post by ID
-router.delete('/:id', deletePost);
+router.delete('/delete/:id', deletePost);
 
 //delete all posts
-router.delete('/', deleteAllPosts);
+router.delete('/delete', deleteAllPosts);
 
 // PATCH request to update a specific post by ID
-router.patch('/:id', updatePost);
+router.patch('/update/:id', updatePost);
   
 // Export the router
 export default router;
