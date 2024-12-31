@@ -3,6 +3,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import postRoutes from './routes/postRoute.js'; // Import the post routes
+import executiveRoutes from './routes/executiveRoute.js'; // Import the executive routes
 
 
 
@@ -16,6 +17,9 @@ app.use(cors());
 
 // Use post routes
 app.use('/api/posts', postRoutes);
+
+//Executive routes
+app.use('/api/executive', executiveRoutes);
 
 const PORT = process.env.PORT || 5000;
 console.log(PORT);
